@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg) scale(1); }
+    25% { transform: translateY(-15px) rotate(3deg) scale(1.1); }
+    50% { transform: translateY(-30px) rotate(-3deg) scale(1); }
+    75% { transform: translateY(-15px) rotate(3deg) scale(0.95); }
+    100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0% 0%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 0%; }
+    75% { background-position: 50% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
+    50% { text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+    100% { text-shadow: 0 0 5px rgba(255,255,255,0.1); }
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(-45deg, 
+        #2b1055,
+        #4b2082,
+        #7597de,
+        #4b2082
+    );
+    background-size: 400% 400%;
+    animation: backgroundMove 20s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before,
+body::after {
+    content: '💱 💵 💶 💷 💴 $ € £ ¥ ₹ ₽ ₿ ₺ ₩ ₫';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    transform: rotate(-15deg);
+    white-space: pre-wrap;
+    line-height: 5rem;
+    animation: backgroundMove 40s linear infinite;
+    filter: blur(1px);
+}
+
+body::after {
+    content: '₡ ₢ ₣ ₤ ₥ ₦ ₧ ₨ ₪ ₫ ₭ ₮ ₯';
+    animation-direction: reverse;
+    animation-duration: 30s;
+    transform: rotate(15deg);
+    filter: blur(2px);
+}
+
+.floating-symbols {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.symbol {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 2rem;
+    animation: float 8s ease-in-out infinite, glow 3s ease-in-out infinite;
+    pointer-events: none;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+    filter: blur(0.3px);
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 95%;
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.converter-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+}
+
+input, select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+input {
+    flex: 1;
+    min-width: 100px;
+}
+
+select {
+    flex: 2;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.8rem 25px 0.8rem 0.8rem;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 1em;
+}
+
+button {
+    padding: 1rem;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #764ba2;
+}
+
+#exchange-rate {
+    text-align: center;
+    margin-top: 1rem;
+    color: #666;
+}
+
+.swap-btn {
+    text-align: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #667eea;
+    transition: transform 0.3s ease;
+}
+
+.swap-btn:hover {
+    transform: scale(1.2);
+}
